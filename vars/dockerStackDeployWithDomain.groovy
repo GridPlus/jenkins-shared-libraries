@@ -1,4 +1,4 @@
-def call(String stackName) {
+def call(String stackName, String domain) {
   script {
     withEnv([
       "SERVICE_DOMAIN=${domain}"

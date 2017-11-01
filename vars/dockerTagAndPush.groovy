@@ -1,4 +1,4 @@
-def call(String stackName) {
+def call(String registry, String imageName, String tag) {
   script {
     sh "docker tag ${imageName} \
       ${registry}/${imageName}:${tag}"
