@@ -1,5 +1,5 @@
 def call(String stackName) {
   script {
-    sh "docker stack deploy --prune -c stack.yml ${stackName}"
+    sh "docker stack deploy --with-registry-auth --prune -c stack.yml ${stackName}"
   }
 }
