@@ -10,7 +10,7 @@ def call(outputFile) {
         IMPORTED_KEY_ID = sh (
             script: 'gpg --list-keys code_signing_key | head -n 2 | tail -n 1',
             returnStdOut: true
-        ).trim()
+        )
 
         sh ( script: 'echo ${IMPORTED_KEY_ID}')
         sh (
