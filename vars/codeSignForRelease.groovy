@@ -8,12 +8,12 @@ def call(outputFile) {
         )
 
         def IMPORTED_KEY_ID = sh (
-            script: 'gpg --list-keys code_signing_key | head -n 2 | tail -n 1 | awk \'{ print $1 }\'',
+            script: "gpg --list-keys code_signing_key | head -n 2 | tail -n 1 | awk '{ print $1 }'",
             returnStdout: true
         ).trim()
 
         sh (
-            script: "expect -c \"spawn gpg --batch -u ${IMPORTED_KEY_ID} --sign ${outputFile}.pgp; send 'y'; expect eof\""
+            script: "expect -c \"spawn gpg --batch -u ${IMPORTED_KEY_ID} --sign ${outputFile}; send 'y'; expect eof\""
         )
     }
 }
