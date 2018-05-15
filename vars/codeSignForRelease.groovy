@@ -7,7 +7,9 @@ def call(outputFile) {
             script: 'expect -c "spawn gpg --batch --import /run/secrets/code_signing_key; send \"${GPG_PASS}\"; expect eof"'
         )
 
-        def IMPORTED_KEY_ID = sh script: 'gpg --list-keys code_signing_key | head -n 2 | tail -n 1', returnStdOut: true
+        sh ( script: 'gpg --list-keys code_signing_key | head -n 2 | tail -n 1 > key_id' )
+
+        def IMPORTED_KEY_ID = readFile('key_id').split("\r?\n")
 
         sh ( script: 'echo ${IMPORTED_KEY_ID}')
         sh (
