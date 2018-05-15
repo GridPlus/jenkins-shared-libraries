@@ -3,6 +3,8 @@ def call(outputFile) {
             credentialsId: "code-signing-key-pw",
             variable: "GPG_PASS"
     )]) {
+
+        sh ( script: 'gpg-agent --daemon')
         sh (
             script: 'expect -c "spawn gpg --batch --import /run/secrets/code_signing_key; send \"${GPG_PASS}\"; expect eof"'
         )
