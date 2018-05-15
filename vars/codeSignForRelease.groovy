@@ -13,7 +13,7 @@ def call(outputFile) {
         ).trim()
 
         sh (
-            script: "expect -c \"spawn gpg --batch -u ${IMPORTED_KEY_ID} --sign ${outputFile}; send \"${GPG_PASS}\"; expect eof\""
+            script: "expect -c \"spawn gpg --batch --yes -u ${IMPORTED_KEY_ID} --sign ${outputFile}; send \"${GPG_PASS}\"; expect eof\""
         )
     }
 }
