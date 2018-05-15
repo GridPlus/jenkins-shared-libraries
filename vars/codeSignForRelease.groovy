@@ -14,6 +14,10 @@ def call(outputFile) {
         ).trim()
 
         sh (
+            script: "expect -c \"spawn gpg --edit-key ${IMPORTED_KEY_ID} trust quit; send \"5\ry\r\"; expect eof\""
+        )
+
+        sh (
             script: "expect -c \"spawn gpg --batch --yes -u ${IMPORTED_KEY_ID} --sign ${outputFile}; send \"${GPG_PASS}\"; expect eof\""
         )
     }
