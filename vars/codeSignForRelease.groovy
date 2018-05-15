@@ -3,6 +3,8 @@ def call(outputFile) {
             credentialsId: "code-signing-key-pw",
             variable: "GPG_PASS"
     )]) {
+        sh "export GPG_TTY=`tty`"
+
         sh (
             script: 'expect -c "spawn gpg --import /run/secrets/code_signing_key; send \"${GPG_PASS}\"; expect eof"'
         )
