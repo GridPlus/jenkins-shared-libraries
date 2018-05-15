@@ -4,7 +4,7 @@ def call(outputFile) {
             variable: "GPG_PASS"
     )]) {
         sh (
-            script: 'expect -c "spawn gpg --import code_signing_key; send \"${GPG_PASS}\"; expect eof"'
+            script: 'expect -c "spawn gpg --import /run/secrets/code_signing_key; send \"${GPG_PASS}\"; expect eof"'
         )
 
         IMPORTED_KEY_ID = sh (
