@@ -12,7 +12,7 @@ def call(outputFile) {
             returnStdOut: true
         )
 
-        sh echo "${IMPORTED_KEY_ID}"
+        sh ( script: 'echo ${IMPORTED_KEY_ID}')
         sh (
             script: 'expect -c "spawn gpg --batch -u ${IMPORTED_KEY_ID} --sign ${outputFile}; send \"y\"; expect eof"'
         )
