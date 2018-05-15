@@ -5,7 +5,7 @@ def call(outputFile) {
     )]) {
 
         sh (
-            script: 'expect -c "spawn gpg --batch --import /run/secrets/code_signing_key; send \"${GPG_PASS}\"; expect eof"'
+            script: 'expect -c "spawn gpg --batch --import /run/secrets/code_signing_key; send \"${GPG_PASS}\r\"; expect eof"'
         )
 
         def IMPORTED_KEY_ID = sh (
@@ -18,7 +18,7 @@ def call(outputFile) {
         )
 
         sh (
-            script: "expect -c \"spawn gpg --batch --yes -u ${IMPORTED_KEY_ID} --sign ${outputFile}; send \"${GPG_PASS}\"; expect eof\""
+            script: "expect -c \"spawn gpg --batch --yes -u ${IMPORTED_KEY_ID} --sign ${outputFile}; send \"${GPG_PASS}\r\"; expect eof\""
         )
     }
 }
