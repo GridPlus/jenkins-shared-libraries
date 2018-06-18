@@ -13,7 +13,7 @@ def call(repoName, targetName, releaseManifest = 'release.txt') {
               sh "mkdir -p trust_dir/private/"
               sh "mv $TARGETS_KEY trust_dir/private/"
 
-              sh "curl --user ${NEXUS_UPLOAD_USER}:${NEXUS_UPLOAD_PASS} --upload-file target.tgz https://nexus.staging-gridpl.us/repository/agent/${repoName}/${targetName}"
-              sh "notary -s https://notary.staging-gridpl.us -d ./trust_dir add -p ${repoName} ${targetName} target.tgz"
+              sh "curl --user ${NEXUS_UPLOAD_USER}:${NEXUS_UPLOAD_PASS} --upload-file target.tgz https://nexus.gridpl.us/repository/agent/${repoName}/${targetName}"
+              sh "notary -s https://notary.gridpl.us -d ./trust_dir add -p ${repoName} ${targetName} target.tgz"
             }
 }
