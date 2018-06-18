@@ -8,7 +8,7 @@ def call(repoName, releaseManifest, targetName) {
             ]) 
             {
               //TODO: Do some stuff here to zip up the files defined in the releaseManifest, and assign archive to targetFile
-              def targetFile = ${releaseManifest}
+              def targetFile = releaseManifest
               //Move targets key to trust dir
               sh "mkdir -p trust_dir/private/"
               sh "mv $TARGETS_KEY trust_dir/private/"
