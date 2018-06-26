@@ -23,7 +23,8 @@ def call(String orgName, String imageName, String tag) {
         sh "docker tag ${imageName} ${imageURI}:${tag}"
         sh "printenv"
         sh "docker push ${imageURI}:${tag}"
-        sh "rm ~/.docker/trust/private/$TARGETS_KEY"
+        sh "ls ~/.docker/trust/private/"
+        // sh "rm ~/.docker/trust/private/$TARGETS_KEY"
         dockerLogout()
       }
     } 
