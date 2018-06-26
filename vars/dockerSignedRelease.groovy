@@ -20,7 +20,7 @@ def call(String orgName, String imageName, String tag) {
       sh "mv $TARGETS_KEY ~/.docker/trust/private/"
       sh "docker login ${dockerRegistry} -u ${USER} -p ${PASS}"
       sh "docker tag ${imageName} ${imageURI}:${tag}"
-      sh "echo $DOCKER_CONTENT_TRUST && echo $DOCKER_CONTENT_TRUST_SERVER"
+      sh "printenv"
       sh "docker push ${imageURI}:${tag}"
       dockerLogout()
     } 
