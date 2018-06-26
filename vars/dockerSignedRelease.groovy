@@ -8,7 +8,7 @@ def call(String orgName, String imageName, String tag) {
       usernamePassword(
             credentialsId: "docker",
             usernameVariable: "USER",
-            passwordVariable: "PASS"
+            passwordVariable: "PASS")
     ]) {
       sh "export DOCKER_CONTENT_TRUST=1"
       sh "export DOCKER_CONTENT_TRUST_SERVER=https://notary.staging-gridpl.us"
