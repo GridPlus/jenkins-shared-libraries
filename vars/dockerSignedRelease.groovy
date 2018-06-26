@@ -1,5 +1,5 @@
 def call(String orgName, String imageName, String tag) {
-  dockerRegistry = 'docker.staging-gridpl.us'
+  dockerRegistry = 'docker.gridpl.us'
   imageURI = "${dockerRegistry}/${orgName}/${imageName}"
   
   script {
@@ -7,13 +7,13 @@ def call(String orgName, String imageName, String tag) {
       file(credentialsId: "${imageURI}-targets-key", variable: "TARGETS_KEY"),
       string(credentialsId: "${imageURI}-targets-key-pw", variable: "DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE"),
       usernamePassword(
-            credentialsId: "nexus-staging",
+            credentialsId: "jenkins-docker",
             usernameVariable: "USER",
             passwordVariable: "PASS")
     ]) {
       withEnv([
         "DOCKER_CONTENT_TRUST=1",
-        "DOCKER_CONTENT_TRUST_SERVER=https://notary.staging-gridpl.us"
+        "DOCKER_CONTENT_TRUST_SERVER=https://notary.gridpl.us"
       ]) {
         sh "mkdir -p ~/.docker/trust/private/"
         sh "mv $TARGETS_KEY ~/.docker/trust/private/"
