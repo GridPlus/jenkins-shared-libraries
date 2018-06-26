@@ -6,7 +6,7 @@ def call(String orgName, String imageName, String tag) {
       file(credentialsId: "${imageURI}-targets-key", variable: "TARGETS_KEY"),
       string(credentialsId: "${imageURI}-targets-key-pw", variable: "DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE"),
       usernamePassword(
-            credentialsId: "docker",
+            credentialsId: "nexus-staging",
             usernameVariable: "USER",
             passwordVariable: "PASS")
     ]) {
