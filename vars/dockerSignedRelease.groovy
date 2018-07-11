@@ -1,6 +1,6 @@
-def call(String orgName, String imageName, String tag) {
+def call(String repoName, String imageName, String tag) {
   dockerRegistry = 'docker.gridpl.us'
-  imageURI = "${dockerRegistry}/${orgName}/${imageName}"
+  imageURI = "${dockerRegistry}/${repoName}/${imageName}"
   
   script {
     withCredentials([
