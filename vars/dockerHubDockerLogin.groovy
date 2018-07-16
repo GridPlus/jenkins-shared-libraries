@@ -1,10 +1,9 @@
 def call() {
-  registry = 'docker.gridpl.us'
     withCredentials([usernamePassword(
-            credentialsId: "jenkins-docker",
+            credentialsId: "docker",
             usernameVariable: "USER",
             passwordVariable: "PASS"
     )]) {
-        sh "docker login https://${registry} -u $USER -p $PASS"
+        sh "docker login -u $USER -p $PASS"
     }
 }

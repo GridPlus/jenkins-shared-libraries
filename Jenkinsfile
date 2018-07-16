@@ -17,9 +17,9 @@ pipeline {
           image = "test"
           tag = getBuildVersion()
           sh "docker build -t ${image} ."
-          nexusDockerLogin()
-          nexusDockerTagAndPushImage(repository,image,tag)
-          nexusDockerRelease(repository,image,tag+"released")
+          dockerLogin()
+          dockerTagAndPushImage(repository,image,tag)
+          dockerRelease(repository,image,tag+"released")
         }
 
       }
