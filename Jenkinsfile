@@ -31,7 +31,7 @@ pipeline {
         script {
           tag = getBuildVersion()
           repository = 'dveenstra'
-          imageName = 'test1'
+          imageName = 'jenkins-test'
           sh "docker build -t ${imageName} ."
           dockerSignedRelease(repository,imageName,tag)
         }
