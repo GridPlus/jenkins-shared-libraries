@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage("test-docker-nexus-libraries") {
       when {
-        branch "master"
+        branch "never"
       }
       steps {
         script {
@@ -21,8 +21,21 @@ pipeline {
           dockerTagAndPushImage(repository,image,tag)
           dockerRelease(repository,image,tag+"released")
         }
-
       }
     }
+    stage ("test-docker-notary-libs") {
+      when {
+        branch "master"
+      }
+      steps {
+        script {
+          tag = getBuildVersion()
+          repository = 'dveenstra'
+          imageName = 'test1'
+        }
+        sh "docker build -t ${imageName} ."
+        dockerSignedRelease(org,imageName,tag)
+      }
   }
+
 }
