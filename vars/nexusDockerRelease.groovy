@@ -5,6 +5,6 @@ def call(String repoName, String imageName, String tag) {
   script {
     nexusDockerLogin()
     nexusDockerTagAndPushImage(repoName,imageName,tag)
-    dockerLogout()
+    nexusDockerLogout()
   }
 }
