@@ -33,7 +33,7 @@ pipeline {
           repository = 'dveenstra'
           imageName = 'test1'
           sh "docker build -t ${imageName} ."
-          dockerSignedRelease(org,imageName,tag)
+          dockerSignedRelease(repository,imageName,tag)
         }
       }
     }
