@@ -32,10 +32,10 @@ pipeline {
           tag = getBuildVersion()
           repository = 'dveenstra'
           imageName = 'test1'
+          sh "docker build -t ${imageName} ."
+          dockerSignedRelease(org,imageName,tag)
         }
-        sh "docker build -t ${imageName} ."
-        dockerSignedRelease(org,imageName,tag)
       }
+    }
   }
-
 }
