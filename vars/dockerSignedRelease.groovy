@@ -5,11 +5,7 @@ def call(String repoName, String imageName, String tag) {
   script {
     withCredentials([
       file(credentialsId: "${imageURI}-targets-key", variable: "TARGETS_KEY"),
-      string(credentialsId: "${imageURI}-targets-key-pw", variable: "DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE"),
-      usernamePassword(
-            credentialsId: "jenkins-docker",
-            usernameVariable: "USER",
-            passwordVariable: "PASS")
+      string(credentialsId: "${imageURI}-targets-key-pw", variable: "DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE")
     ]) {
       withEnv([
         "DOCKER_CONTENT_TRUST=1",
@@ -17,11 +13,11 @@ def call(String repoName, String imageName, String tag) {
       ]) {
         sh "mkdir -p ~/.docker/trust/private/"
         sh "mv $TARGETS_KEY ~/.docker/trust/private/"
-        sh "docker login ${dockerRegistry} -u ${USER} -p ${PASS}"
-        sh "docker tag ${imageName} ${imageURI}:${tag}"
-        sh "docker push ${imageURI}:${tag}"
-        sh "rm -rf ~/.docker/trust/private/"
+        dockerLogin()
+        dockerTagAndPushImage(repoName,imageName,tag)
         dockerLogout()
+        sh "rm -rf ~/.docker/trust/private/"
+
       }
     } 
   }
